@@ -1,0 +1,61 @@
+#docker-compose
+version: "3.7"
+services: 
+  demo-tnt:
+    image: housseinetassa/demotnt
+    volumes:
+      - //c/dockertoolbox/dockerCompose/logs:/usr/share/filebeat/data/logs
+    environment:
+      - "JAVA_OPTS=-DLOGPATH=/usr/share/filebeat/data/logs/logs.txt"
+    ports:
+      - 8080:8080
+    depends_on:
+      - filebeat
+    networks:
+      - logging-network
+  elasticsearch:
+    image: elasticsearch:7.3.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment: 
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    networks: 
+      - logging-network
+  kibana:
+    image: kibana:7.3.1
+    depends_on:
+      - elasticsearch
+    ports: 
+      - 5601:5601
+    networks: 
+      - logging-network
+  logstash:
+    image: logstash:7.3.1
+    depends_on: 
+      - kibana
+    volumes:
+      - //c/dockertoolbox/dockerCompose/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro 
+    networks: 
+      - logging-network
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.3.1
+    command: filebeat -e -strict.perms=false
+    user: root
+    configs:
+      - source: //c/dockertoolbox/dockerCompose/filebeat.yml
+        target: /usr/share/filebeat/filebeat.yml
+    volumes:
+      - //c/dockertoolbox/dockerCompose/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - //c/dockertoolbox/dockerCompose/logs:/usr/share/filebeat/data/logs
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro
+    networks: 
+      - logging-network
+    depends_on:
+      - elasticsearch
+    restart: unless-stopped
+networks: 
+  logging-network:
+    driver: bridge

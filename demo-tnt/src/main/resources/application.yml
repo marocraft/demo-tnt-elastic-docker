@@ -1,0 +1,38 @@
+tnt:
+ logging:
+  format:
+   default: >
+    {"methodName": "{{methodName}}",
+    "className": "{{className}}",
+    "logLevel": "{{logLevel}}",
+    "executionTime": "{{executionTime}}",
+    "logMessage": "{{logMessage}}",
+    "timeStamps": "{{timeStamps}}",
+    "traceId": "{{traceId}}",
+    "spanId": "{{spanId}}",
+    "parentId": "{{parentId}}",
+    "ip": "{{ip}}"}
+    
+   rest: >
+    {"methodName": "{{methodName}}",
+    "className": "{{className}}",
+    "logLevel": "{{logLevel}}",
+    "executionTime": "{{executionTime}}",
+    "logMessage": "{{logMessage}}",
+    "timeStamps": "{{timeStamps}}",
+    "httpVerb": "{{httpVerb}}",
+    "httpStatus": "{{httpStatus}}",
+    "httpURI": "{{httpURI}}",
+    "traceId": "{{traceId}}",
+    "spanId": "{{spanId}}",
+    "parentId": "{{parentId}}",
+    "ip": "{{ip}}"}
+
+ output: json
+ multithread:
+  poolsize: 1
+ correlation:
+  traceid: x-b3-traceid
+  spanid: x-b3-spanid
+  parentspanid: x-b3-parentspanid
+  

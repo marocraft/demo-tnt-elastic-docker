@@ -1,0 +1,4 @@
+{"methodName": "getHelloTnT", "className": "com.github.marocraft.demo.demotnt.controllers.TnTController", "logLevel": "INFO", "executionTime": "27", "logMessage": "get Hello TnT controller", "timeStamps": "2019-09-10T22:30:23.610000000 +01", "httpVerb": "GET", "httpStatus": "200", "httpURI": "/hello", "traceId": "f2d78e6b7df4db11", "spanId": "8344a0bd3e1e0542", "parentId": "", "ip": "0:0:0:0:0:0:0:1"}
+
+{"methodName": "getHelloTnT", "className": "com.github.marocraft.demo.demotnt.controllers.TnTController", "logLevel": "INFO", "executionTime": "3", "logMessage": "get Hello TnT controller", "timeStamps": "2019-09-10T22:47:06.359000000 +01", "httpVerb": "GET", "httpStatus": "200", "httpURI": "/hello", "traceId": "bc8a1aebed46b49e", "spanId": "5913d816c3609fe0", "parentId": "", "ip": "0:0:0:0:0:0:0:1"}
+

@@ -39,5 +39,36 @@ Enable the output to send logs to logstash :
 ### Step3
 configure logstash.conf
 
+```json
+input {
+  beats {
+    port => 5044
+  }
+}
+
+filter {
+ json {
+		source => "message"
+      }
+}
+
+output {
+	elasticsearch {
+		hosts => "192.168.99.100:9200"
+		index => "tnt-logs"
+	}
+
+	stdout { codec => rubydebug }
+
+}
+```
+
+- The input section is to define the port where filebeat is using to send logs to logstash
+- The Filter section is using json format so no pattern needed be cause Track N Trace uses by default json format to logs
+- Then finally we definde elasticsearch as output of logstash, for that you should give two parameters :
+ - hosts: your docker host machine , you can get it by using the following command line : docker-machine ip
+ - index: the index you want to use in elasticsearch and kibana
+the stdout is optional if you need to display the logstash output on your command prompt
+
 
 

@@ -36,6 +36,8 @@ Enable the output to send logs to logstash :
   # The Logstash hosts
   hosts: ["logstash:5044"]
 ```
+### Step3
+configure logstash.conf
 
 
 

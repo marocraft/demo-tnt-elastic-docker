@@ -140,6 +140,9 @@ networks:
 ```
 You need to define each service configuration, make sure to change paths with your own folder path , and if you are using docker on windows you may need to mount volumes if they are not accessible by docker-machine: https://medium.com/@Charles_Stover/fixing-volumes-in-docker-toolbox-4ad5ace0e572
 
+If you want to edit the app you must rebuild the container of the app with this command : `docker build -f Dockerfile -t demo-tnt .` .
+
+In this case you must change in service app section `image: housseinetassa/demotnt` to `build demo-tnt` .
 ## step 5
 
 In dockerCompose folder run the following command docker-compose up
